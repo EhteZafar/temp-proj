@@ -1,3 +1,5 @@
+"use client";
+
 import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
 import { useEffect } from 'react'
 import axios from 'axios'
