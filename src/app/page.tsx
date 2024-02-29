@@ -1,25 +1,26 @@
 import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
+import { useEffect } from 'react'
+import axios from 'axios'
+
  
-type Repo = {
-  name: string
-  stargazers_count: number
+const page = () => {
+
+  const api = async () => {
+    const res = await axios.get('http://fypnest.eastus.cloudapp.azure.com:5000/api/user/findApplicantDetails/1')
+    // const data = await res.json()
+    // console.log(data)
+  }
+
+  // useEffect(() => {
+  //   api();
+  // }, [])
+
+    return (
+        <div>
+            <button onClick={api}>api</button>
+            <h1>Page</h1>
+        </div>
+    )
 }
- 
-export const getServerSideProps: GetServerSideProps<{
-  repo: Repo
-}> = async () => {
-  console.log('getServerSideProps')
-  const res = await fetch('https://api.github.com/repos/vercel/next.js')
-  const repo = await res.json()
-  return { props: { repo } }
-}
- 
-export default function Page({
-  repo,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  return (
-    <div>
-      Next stars: {repo}
-    </div>
-  )
-}
+
+export default page;
